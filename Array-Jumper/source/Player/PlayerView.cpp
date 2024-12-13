@@ -50,7 +50,7 @@ namespace Player
 
 	void PlayerView::initializePlayerImage()
 	{
-		player_image->initialize(Config::character_texture_path, player_width, player_height, sf::Vector2f(100, 100));
+		player_image->initialize(Config::character_texture_path, player_width, player_height, sf::Vector2f(0, 0));
 	}
 
 	void PlayerView::loadPlayer()
@@ -61,7 +61,7 @@ namespace Player
 
 	sf::Vector2f PlayerView::calculatePlayerPosition()
 	{
-		return sf::Vector2f(100, 100);
+		return sf::Vector2f(0,0);
 	}
 
 	void PlayerView::updatePlayerPosition()
