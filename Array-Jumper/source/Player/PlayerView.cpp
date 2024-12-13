@@ -1,14 +1,17 @@
 #include "../../header/Player/PlayerView.h"
-
-
+#include "../../header/Player/PlayerController.h"
+#include "../../header/Player/PlayerModel.h"
+#include "../../header/Global/Config.h"
 
 using namespace UI::UIElement;
 using namespace Global;
 
 namespace Player
 {
-	PlayerView::PlayerView()
+	PlayerView::PlayerView(PlayerController* controller)
 	{
+		calculatePlayerDimensions();
+		player_controller = controller;
 		game_window = nullptr;
 		player_image = new ImageView();
 	}
@@ -31,18 +34,23 @@ namespace Player
 
 	void PlayerView::render()
 	{
-		drawPlayer();
+		switch (player_controller->GetPlayerState())
+		{
+			case PlayerState::ALIVE:
+				drawPlayer();
+			break;
+		}
 	}
 
 	void PlayerView::calculatePlayerDimensions()
 	{
-		player_width = 1000.0f;
-		player_height = 1000.0f;
+		player_width = 1000.f;
+		player_height = 1000.f;
 	}
 
 	void PlayerView::initializePlayerImage()
 	{
-		player_image->initialize(Config::character_texture_path, player_width, player_height, sf::Vector2f(2,0));
+		player_image->initialize(Config::character_texture_path, player_width, player_height, sf::Vector2f(100, 100));
 	}
 
 	void PlayerView::loadPlayer()
@@ -53,12 +61,7 @@ namespace Player
 
 	sf::Vector2f PlayerView::calculatePlayerPosition()
 	{
-		return sf::Vector2f(0, 0);
-	}
-
-	void PlayerView::updatePlayerPosition()
-	{
-		player_image->setPosition(calculatePlayerPosition());
+		return sf::Vector2f(100, 100);
 	}
 
 	void PlayerView::updatePlayerPosition()
