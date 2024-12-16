@@ -4,6 +4,7 @@ namespace Level
 {
 	class LevelModel;
 	class LevelView;
+	enum  BlockType;
 
 	class LevelController
 	{

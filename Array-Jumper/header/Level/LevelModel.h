@@ -5,11 +5,11 @@ namespace Level
 {
 	struct BoxDimensions
 	{
-		float box_width;
-		float box_height;
-		float box_spacing;
+		float box_width = 5.f;
+		float box_height = 5.f;
+		float box_spacing = 5.f;
 
-		float box_spacing_percentage = 0.3;
+		float box_spacing_percentage = 0.3f;
 		float bottom_offset = 200.f;
 	};
 
@@ -22,6 +22,6 @@ namespace Level
 		LevelModel();
 		~LevelModel();
 
-		BlockType getCurrentBoxValue(int currentPosition);
+		BlockType getBoxValue(int currentPosition);
 	};
 }
