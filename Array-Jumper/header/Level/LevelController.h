@@ -15,6 +15,8 @@ namespace Level
 		LevelController();
 		~LevelController();
 
+		BlockType getCurrentBoxValue(int currentPosition);
+
 		void initialize();
 		void update();
 		void render();
