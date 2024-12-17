@@ -29,6 +29,7 @@ namespace Level
 		void drawLevel();
 		void deleteImages();
 
+		
 	public:
 		LevelView(LevelController* controller);
 		~LevelView();
@@ -45,6 +46,7 @@ namespace Level
 		void calculateBoxWidthHeight();
 		void calculateBoxSpacing();
 
+		BoxDimensions getBoxDimensions();
 		sf::Vector2f calculateBoxPosition(int index);
 	};
 }

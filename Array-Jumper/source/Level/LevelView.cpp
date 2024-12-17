@@ -2,6 +2,7 @@
 #include "../../header/Level/LevelController.h"
 #include "../../header/Global/Config.h"
 #include "../../header/Global/ServiceLocator.h"
+#include "../../header/Level/LevelData.h"
 
 namespace Level
 {
@@ -170,5 +171,10 @@ namespace Level
 		float xPosition = box_dimensions.box_spacing + static_cast<float>(index) * (box_dimensions.box_width + box_dimensions.box_spacing);
 		float yPosition = static_cast<float>(game_window->getSize().y) - box_dimensions.box_height - box_dimensions.bottom_offset;
 		return sf::Vector2f(xPosition, yPosition);
+	}
+
+	BoxDimensions LevelView::getBoxDimensions()
+	{
+		return box_dimensions;
 	}
 }

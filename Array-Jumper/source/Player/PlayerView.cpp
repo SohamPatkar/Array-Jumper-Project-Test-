@@ -10,7 +10,6 @@ namespace Player
 {
 	PlayerView::PlayerView(PlayerController* controller)
 	{
-		calculatePlayerDimensions();
 		player_controller = controller;
 		game_window = nullptr;
 		player_image = new ImageView();
@@ -18,7 +17,7 @@ namespace Player
 
 	PlayerView::~PlayerView()
 	{
-
+		
 	}
 
 	void PlayerView::initialize()
@@ -44,8 +43,9 @@ namespace Player
 
 	void PlayerView::calculatePlayerDimensions()
 	{
-		player_width = 1000.f;
-		player_height = 1000.f;
+		current_box_dimensions = ServiceLocator::getInstance()->getLevelService()->getBoxDimensionsFromController();
+		player_width = current_box_dimensions.box_width;
+		player_height = current_box_dimensions.box_width;
 	}
 
 	void PlayerView::initializePlayerImage()
@@ -61,7 +61,9 @@ namespace Player
 
 	sf::Vector2f PlayerView::calculatePlayerPosition()
 	{
-		return sf::Vector2f(0,0);
+		float xPosition = current_box_dimensions.box_spacing + static_cast<float>(player_controller->getCurrentPosition()) * (current_box_dimensions.box_width + current_box_dimensions.box_spacing);
+		float yPosition = static_cast<float>(game_window->getSize().y) - current_box_dimensions.box_height - current_box_dimensions.bottom_offset - player_height;
+		return sf::Vector2f(xPosition, yPosition);
 	}
 
 	void PlayerView::updatePlayerPosition()
