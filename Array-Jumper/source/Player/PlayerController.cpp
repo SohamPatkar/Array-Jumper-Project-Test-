@@ -155,4 +155,9 @@ namespace Player
 			return false;
 		}
 	}
+
+	void PlayerController::takeDamage()
+	{
+
+	}
 }

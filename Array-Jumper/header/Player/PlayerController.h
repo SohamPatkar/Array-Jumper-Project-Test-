@@ -30,6 +30,7 @@ namespace Player
 		void move(MovementDirection direction);
 		void readInput();
 		void jump(MovementDirection direction);
+		void takeDamage();
 
 		Level::BlockType getCurrentBoxValue(int currentPosition);
 
