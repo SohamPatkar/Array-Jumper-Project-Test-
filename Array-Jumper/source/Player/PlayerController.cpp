@@ -12,6 +12,7 @@ namespace Player
 	{
 		player_model = new PlayerModel();
 		player_view = new PlayerView(this);
+		level_service = new Level::LevelService();
 	}
 
 	PlayerController::~PlayerController()
@@ -58,6 +59,34 @@ namespace Player
 		return player_model->GetCurrentPosition();
 	}
 
+	void PlayerController::jump(MovementDirection direction)
+	{
+		int steps, targetPosition;
+		int currentPosition = player_model->GetCurrentPosition();
+		Level::BlockType box_value = Global::ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValueFromController(currentPosition);
+
+		switch (direction)
+		{
+		case MovementDirection::FORWARD:
+			steps = box_value;
+			break;
+		case MovementDirection::BACKWARD:
+			steps = box_value;
+			break;
+		default:
+			steps = 0;
+			break;
+		}
+
+		targetPosition = player_model->GetCurrentPosition() + steps;
+
+		if (!isPositionInBound(targetPosition))
+			return;
+
+		player_model->SetCurrentPosition(targetPosition);
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::JUMP);
+	}
+
 	void PlayerController::move(MovementDirection direction)
 	{
 		int steps, targetPosition;
@@ -84,15 +113,34 @@ namespace Player
 		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::MOVE);
 	}
 
+	Level::BlockType PlayerController::getCurrentBoxValue(int currentPosition)
+	{ 
+		return level_service->getCurrentBoxValueFromController(currentPosition);
+	}
+
 	void PlayerController::readInput()
 	{
 		if (event_service->pressedDKey() || event_service->pressedRightArrowKey())
 		{
-			move(MovementDirection::FORWARD);
+			if (event_service->heldSpaceKey())
+			{
+				jump(MovementDirection::FORWARD);
+			}
+			else
+			{
+				move(MovementDirection::FORWARD);
+			}
 		}
 		else if (event_service->pressedAKey() || event_service->pressedLeftArrowKey())
 		{
-			move(MovementDirection::BACKWARD);
+			if (event_service->heldSpaceKey())
+			{
+				jump(MovementDirection::BACKWARD);
+			}
+			else
+			{
+				move(MovementDirection::BACKWARD);
+			}	
 		}
 	}
 

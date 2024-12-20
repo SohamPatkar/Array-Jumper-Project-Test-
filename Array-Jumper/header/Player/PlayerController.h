@@ -1,5 +1,7 @@
 #pragma once
 #include "../../header/Event/EventService.h"
+#include "../../header/Level/BlockType.h"
+#include "../../header/Level/LevelService.h"
 
 namespace Player
 {
@@ -14,6 +16,8 @@ namespace Player
 		PlayerView* player_view;
 		PlayerModel* player_model;
 		Event::EventService* event_service;
+		Level::LevelService* level_service;
+
 
 		void destroy();
 	public:
@@ -25,6 +29,9 @@ namespace Player
 		void render();
 		void move(MovementDirection direction);
 		void readInput();
+		void jump(MovementDirection direction);
+
+		Level::BlockType getCurrentBoxValue(int currentPosition);
 
 		int getCurrentPosition();
 		bool isPositionInBound(int targetPosition);

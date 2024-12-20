@@ -4,6 +4,7 @@ namespace Level
 {
 	class LevelController;
 	struct BoxDimensions;
+	enum BlockType;
 
 	class LevelService 
 	{
@@ -19,6 +20,7 @@ namespace Level
 		void update();
 		void render();
 
+		BlockType getCurrentBoxValueFromController(int currentPosition);
 		BoxDimensions getBoxDimensionsFromController();
 	};
 }
