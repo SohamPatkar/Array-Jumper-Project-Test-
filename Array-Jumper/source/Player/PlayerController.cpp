@@ -85,6 +85,7 @@ namespace Player
 
 		player_model->SetCurrentPosition(targetPosition);
 		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::JUMP);
+		Global::ServiceLocator::getInstance()->getGameplayService()->onPositionChanged(targetPosition);
 	}
 
 	void PlayerController::move(MovementDirection direction)
@@ -111,6 +112,7 @@ namespace Player
 
 		player_model->SetCurrentPosition(targetPosition);
 		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::MOVE);
+		Global::ServiceLocator::getInstance()->getGameplayService()->onPositionChanged(targetPosition);
 	}
 
 	Level::BlockType PlayerController::getCurrentBoxValue(int currentPosition)
@@ -157,6 +159,11 @@ namespace Player
 	}
 
 	void PlayerController::takeDamage()
+	{
+
+	}
+
+	void PlayerController::reset()
 	{
 
 	}

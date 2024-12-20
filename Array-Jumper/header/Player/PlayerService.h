@@ -20,5 +20,7 @@ namespace Player
 		void initialize();
 		void update();
 		void render();
+
+		void levelComplete();
 	};
 }
