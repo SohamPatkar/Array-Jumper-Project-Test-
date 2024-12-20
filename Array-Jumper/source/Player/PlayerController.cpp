@@ -1,6 +1,10 @@
 #include "../../header/Player/PlayerController.h"
 #include "../../header/Player/PlayerModel.h"
 #include "../../header/Player/PlayerView.h"
+#include "../../header/Player/MovementDirection.h"
+#include "../../header/Level/LevelData.h"
+#include "../../header/Global/ServiceLocator.h"
+#include "../../header/Sound/SoundService.h"
 
 namespace Player
 {
@@ -19,11 +23,13 @@ namespace Player
 	{
 		player_model->SetPlayerState(PlayerState::ALIVE);
 		player_view->initialize();
+		event_service = Global::ServiceLocator::getInstance()->getEventService();
 	}
 
 	void PlayerController::update()
 	{
 		player_view->update();
+		readInput();
 	}
 
 	void PlayerController::render()
@@ -52,4 +58,53 @@ namespace Player
 		return player_model->GetCurrentPosition();
 	}
 
+	void PlayerController::move(MovementDirection direction)
+	{
+		int steps, targetPosition;
+
+		switch (direction)
+		{
+			case MovementDirection::FORWARD:
+				steps = 1;
+				break;
+			case MovementDirection::BACKWARD:
+				steps = -1;
+				break;
+			default:
+				steps = 0;
+				break;
+		}
+
+		targetPosition = player_model->GetCurrentPosition() + steps;
+
+		if (!isPositionInBound(targetPosition))
+			return;
+
+		player_model->SetCurrentPosition(targetPosition);
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::MOVE);
+	}
+
+	void PlayerController::readInput()
+	{
+		if (event_service->pressedDKey() || event_service->pressedRightArrowKey())
+		{
+			move(MovementDirection::FORWARD);
+		}
+		else if (event_service->pressedAKey() || event_service->pressedLeftArrowKey())
+		{
+			move(MovementDirection::BACKWARD);
+		}
+	}
+
+	bool PlayerController::isPositionInBound(int targetPosition)
+	{
+		if (targetPosition >= 0 && targetPosition < Level::LevelData::number_of_boxes)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
