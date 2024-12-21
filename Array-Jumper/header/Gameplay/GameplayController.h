@@ -22,5 +22,7 @@ namespace Gameplay
 		void processEndBlock();
 		void gameOver();
 		void onDeath();
+		void gameWon();
+		void startGame();
 	};
 }

@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="header\Gameplay\GameplayController.h" />
     <ClInclude Include="header\Gameplay\GameplayService.h" />
+    <ClInclude Include="header\Level\LevelConfiguration.h" />
     <ClInclude Include="header\UI\Gameplay\GameplayUIController.h" />
     <ClInclude Include="header\Global\Config.h" />
     <ClInclude Include="header\Event\EventService.h" />

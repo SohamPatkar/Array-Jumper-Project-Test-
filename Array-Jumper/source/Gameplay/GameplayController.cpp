@@ -13,16 +13,24 @@ namespace Gameplay
 
 	void GameplayController::initialize()
 	{
-
+		startGame();
 	}
 
 	void GameplayController::update()
 	{
-
+		
 	}
 
 	void GameplayController::render()
 	{
+
+	}
+
+	void GameplayController::startGame()
+	{
+		Main::GameService::setGameState(Main::GameState::GAMEPLAY);
+		return Global::ServiceLocator::getInstance()->getLevelService()->resetLevels();
+		return Global::ServiceLocator::getInstance()->getPlayerService()->resetPlayer();
 
 	}
 
@@ -74,7 +82,14 @@ namespace Gameplay
 	{
 		Global::ServiceLocator::getInstance()->getPlayerService()->levelComplete();
 		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::LEVEL_COMPLETE);
-		Main::GameService::setGameState(Main::GameState::CREDITS);
+
+		if (Global::ServiceLocator::getInstance()->getLevelService()->isLastLevel())
+		{
+			gameWon();
+			return;
+		}
+
+		Global::ServiceLocator::getInstance()->getLevelService()->loadNextLevel();
 	}
 
 	void GameplayController::gameOver()
@@ -86,5 +101,11 @@ namespace Gameplay
 	void GameplayController::onDeath()
 	{
 		gameOver();
+	}
+
+	void GameplayController::gameWon()
+	{
+		Main::GameService::setGameState(Main::GameState::CREDITS);
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::LEVEL_COMPLETE);
 	}
 }

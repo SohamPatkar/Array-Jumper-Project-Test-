@@ -33,6 +33,11 @@ namespace Player
 		delete(player_controller);
 	}
 
+	void PlayerService::resetPlayer()
+	{
+		player_controller->reset();
+	}
+
 	void PlayerService::takeDamage()
 	{
 		player_controller->takeDamage();
