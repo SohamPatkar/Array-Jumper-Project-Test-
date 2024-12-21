@@ -11,7 +11,7 @@ namespace Gameplay
 
 	GameplayService::~GameplayService()
 	{
-
+		delete(gameplay_controller);
 	}
 
 	void GameplayService::initialize()
@@ -27,6 +27,11 @@ namespace Gameplay
 	void GameplayService::render()
 	{
 		gameplay_controller->render();
+	}
+
+	void GameplayService::startGame()
+	{
+		gameplay_controller->startGame();
 	}
 
 	void GameplayService::onPositionChanged(int position)
