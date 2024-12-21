@@ -21,6 +21,8 @@ namespace Player
 		void update();
 		void render();
 
+		int GetCurrentLives();
+
 		void levelComplete();
 	};
 }

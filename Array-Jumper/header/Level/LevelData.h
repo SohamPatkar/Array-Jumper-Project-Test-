@@ -13,7 +13,7 @@ namespace Level
 			BlockType::OBSTACLE_TWO,
 			BlockType::ONE,
 			BlockType::TWO,
-			BlockType::TARGET,
+			BlockType::ONE,
 			BlockType::ONE,
 			BlockType::TWO,
 			BlockType::THREE,

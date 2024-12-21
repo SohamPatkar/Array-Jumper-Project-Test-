@@ -160,11 +160,30 @@ namespace Player
 
 	void PlayerController::takeDamage()
 	{
-
+		player_model->DecrementLife();
+		if (player_model->GetCurrentLives() <= 0)
+		{
+			onDeath();
+		}
+		else
+		{
+			player_model->ResetPosition();
+		}
 	}
 
 	void PlayerController::reset()
 	{
+		player_model->ResetPlayer();
+	}
 
+	int PlayerController::GetCurrentLives()
+	{
+		return player_model->GetCurrentLives();
+	}
+
+	void PlayerController::onDeath()
+	{
+		Global::ServiceLocator::getInstance()->getGameplayService()->onDeath();
+		player_model->ResetPlayer();
 	}
 }

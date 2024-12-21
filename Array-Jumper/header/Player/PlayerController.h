@@ -32,6 +32,9 @@ namespace Player
 		void jump(MovementDirection direction);
 		void takeDamage();
 		void reset();
+		void onDeath();
+
+		int GetCurrentLives();
 
 		Level::BlockType getCurrentBoxValue(int currentPosition);
 
