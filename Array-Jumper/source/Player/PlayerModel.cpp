@@ -21,4 +21,26 @@ namespace Player
 	{
 		player_state = new_player_state;
 	}
+
+	int PlayerModel::GetCurrentLives()
+	{
+		return current_lives;
+	}
+
+	void PlayerModel::ResetPlayer()
+	{
+		current_position = 0;
+		player_state = PlayerState::ALIVE;
+		current_lives = max_lives;
+	}
+
+	void PlayerModel::DecrementLife()
+	{
+		current_lives--;
+	}
+
+	void PlayerModel::ResetPosition()
+	{
+		current_position = 0;
+	}
 }	

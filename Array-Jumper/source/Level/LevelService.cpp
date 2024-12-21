@@ -1,6 +1,7 @@
 #include "../../header/Level/LevelService.h"
 #include "../../header/Level/LevelController.h"
 #include "../../header/Level/LevelModel.h"
+#include "../../header/Level/BlockType.h"
 
 namespace Level
 {
@@ -32,6 +33,11 @@ namespace Level
 	void LevelService::destroy()
 	{
 		delete(level_controller);
+	}
+
+	BlockType LevelService::getCurrentBoxValueFromController(int currentPosition)
+	{
+		return level_controller->getCurrentBoxValue(currentPosition);
 	}
 
 	BoxDimensions LevelService::getBoxDimensionsFromController()
