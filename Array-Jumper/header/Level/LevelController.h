@@ -24,5 +24,10 @@ namespace Level
 		void initialize();
 		void update();
 		void render();
+
+		bool isLastLevel();
+		void loadNextLevel();
+		int getCurrentLevelNumber();
+		void resetLevels();
 	};
 }
