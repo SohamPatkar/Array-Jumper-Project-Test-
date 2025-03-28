@@ -22,6 +22,7 @@ namespace Player
 		void render();
 
 		int GetCurrentLives();
+		void resetPlayer();
 
 		void levelComplete();
 	};

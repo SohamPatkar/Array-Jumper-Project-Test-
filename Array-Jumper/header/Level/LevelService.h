@@ -22,5 +22,10 @@ namespace Level
 
 		BlockType getCurrentBoxValueFromController(int currentPosition);
 		BoxDimensions getBoxDimensionsFromController();
+
+		bool isLastLevel();
+		void loadNextLevel();
+		int getCurrentLevelNumber();
+		void resetLevels();
 	};
 }
